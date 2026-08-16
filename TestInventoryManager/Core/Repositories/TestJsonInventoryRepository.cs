@@ -1,5 +1,5 @@
 using InventoryManager.Core.Models.DTO;
-using InventoryManager.Core.Repositories;
+using Utils;
 
 namespace TestInventoryManager.Core.Repositories;
 

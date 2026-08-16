@@ -1,8 +1,8 @@
 using InventoryManager.Core.Mappers;
 using InventoryManager.Core.Models;
 using InventoryManager.Core.Models.DTO;
-using InventoryManager.Core.Repositories;
 using InventoryManager.Core.Services;
+using Utils;
 
 namespace TestInventoryManager.Core;
 

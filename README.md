@@ -1,4 +1,7 @@
-# InventoryManager
+# Inventory Manager
+
+[![Build](https://img.shields.io/github/actions/workflow/status/markm001/inventory-manager/publish.yml)](https://github.com/markm001/inventory-manager/actions)
+![GitHub Tag](https://img.shields.io/github/v/tag/markm001/inventory-manager)
 
 A reusable inventory library designed to provide a decoupled foundation for game inventory systems.
 
@@ -33,25 +36,25 @@ The project follows a layered architecture:
                          JSON / Save File
                                 │
                                 ▼
-                     JsonRepository<TData>
+                      JsonRepository<TData>
                                 │
                                 ▼
-                              DTOs
+                               DTOs
                                 │
                                 ▼
                            DataMapper
                                 │
                                 ▼
-                         Domain Models
+                          Domain Models
                                 │
                    ┌────────────┴────────────┐
                    ▼                         ▼
-             Inventory<T>                ItemState
+               Inventory<T>              ItemState
                    │                         │
              ┌─────┴─────┐                   │
              ▼           ▼                   ▼
-         Stackable     Unique          ItemStateService
-         Service       Service
+          Stackable    Unique          ItemStateService
+          Service      Service
 ```
 
 ---
@@ -213,7 +216,7 @@ public sealed record UniqueInventoryData(
 );
 ```
 
-Examples for all data can be found [within the TestData](https://github.com/markm001/inventory-manager/tree/main/TestLevelManager/TestData)
+Examples for all data can be found [within the TestData](https://github.com/markm001/inventory-manager/tree/main/TestInventoryManager/TestData)
 
 ---
 
@@ -245,6 +248,16 @@ InventoryData to Inventory<ItemStack> and Inventory<UniqueItem>
 `InventoryDataMapper`:
 ```text
 Inventory<ItemStack> or Inventory<UniqueItem> to InventoryData
+```
+
+---
+
+## Validatiors
+
+The `InventoryStateValidator` can be used to validate machtching UUIDs between UniqueItems and ItemStates.
+```csharp
+var validator = new InventoryStateValidator();
+validator.Validate(inventory, stateService.States);
 ```
 
 ---
