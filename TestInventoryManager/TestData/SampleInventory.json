@@ -1,0 +1,21 @@
+{
+  "stackableItems": {
+    "GOLD": 125000,
+    "POTION": 25,
+    "CRYSTAL": 500
+  },
+  "uniqueItems": [
+    {
+      "instanceId": "8d8c4f7a-2c8e-4a8a-8a44-8c0b5c9a5f21",
+      "itemId": "IRON_ARMOR"
+    },
+    {
+      "instanceId": "4b6a1b30-9a4d-44b8-90d0-0f9d2a4a6e11",
+      "itemId": "IRON_ARMOR"
+    },
+    {
+      "instanceId": "d73b6f42-0d7e-4c58-8e91-73c6f4e8c5b3",
+      "itemId": "STEEL_SWORD"
+    }
+  ]
+}

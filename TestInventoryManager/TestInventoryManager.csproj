@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="ccat.common.utils" Version="1.0.1" />
+        <PackageReference Include="MSTest" Version="4.0.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\InventoryManager\InventoryManager.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="TestData\SampleInventory.json" />
+      <Content Include="TestData\SampleInventory.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="TestData\StackableInventory.json" />
+      <None Remove="TestData\UniqueInventory.json" />
+      <None Remove="TestData\SampleEquipmentStates.json" />
+      <Content Include="TestData\SampleEquipmentStates.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="TestData\WrittenInventory.json" />
+    </ItemGroup>
+
+</Project>
