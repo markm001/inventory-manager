@@ -322,7 +322,7 @@ Core
 ├── Mappers
 │   ├── InventoryDataMapper
 │   ├── InventoryMapper
-│   ├── ItemStateMapper
+│   └── ItemStateMapper
 │
 ├── Models
 │   ├── Inventory
@@ -335,18 +335,8 @@ Core
 │       ├── InventoryData
 │       └── ItemStateData
 │
-├── Repositories
-│   └── JsonRepository (To be moved)
-│
 └── Services
     ├── StackableInventoryService
     ├── UniqueInventoryService
     └── ItemStateService
 ```
-
----
-
-## Future Improvement
-
-- [ ] Moving `JsonRepository` to csharp-Utils package.
-- [ ] `InstanceId` to `ItemState` valdation - *should detect whether an ItemState can be matched to a unique Item and throw an exception.*
