@@ -253,7 +253,7 @@ Inventory<ItemStack> or Inventory<UniqueItem> to InventoryData
 
 ---
 
-## Validatiors
+## Validators
 
 The `InventoryStateValidator` can be used to validate matching UUIDs between UniqueItems and ItemStates.
 ```csharp
