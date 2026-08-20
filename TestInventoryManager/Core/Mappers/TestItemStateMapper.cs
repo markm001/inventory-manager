@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using InventoryManager.Core.Mappers;
 using InventoryManager.Core.Models;
 using InventoryManager.Core.Models.DTO;
@@ -13,12 +12,14 @@ public class TestItemStateMapper
     {
         List<string> expectedSlots = ["SLOT_1","SLOT_2"];
         int expectedLevel = 10;
-        ItemStateData expected = new ItemStateData("UUID", expectedLevel, expectedSlots);
+        int expectedExperience = 100;
+        ItemStateData expected = new ItemStateData("UUID", expectedLevel, expectedExperience, expectedSlots);
         
         Dictionary<string, ItemState> itemStates = ItemStateMapper.ToItemState([expected]);
         
         Assert.IsNotNull(itemStates["UUID"]);
         Assert.AreEqual(expectedLevel,itemStates["UUID"].Level);
+        Assert.AreEqual(expectedExperience,itemStates["UUID"].Experience);
         
         CollectionAssert.AreEqual(expectedSlots, itemStates["UUID"].Slots.ToList());
     }
@@ -28,10 +29,11 @@ public class TestItemStateMapper
     {
         string expectedUuid = "UUID";
         int expectedLevel = 10;
+        int expectedExperience = 100;
         List<string> expectedSlots = ["SLOT_1","SLOT_2"];
 
         Dictionary<string, ItemState> itemStates =  new Dictionary<string, ItemState> {
-            { expectedUuid, new ItemState(expectedLevel, expectedSlots) }
+            { expectedUuid, new ItemState(expectedLevel, expectedExperience, expectedSlots) }
         };
 
         IReadOnlyList<ItemStateData> actual = ItemStateMapper.ToStateData(itemStates);
@@ -39,6 +41,7 @@ public class TestItemStateMapper
         Assert.IsNotNull(actual);
         Assert.AreEqual(expectedUuid,actual[0].InstanceId);
         Assert.AreEqual(expectedLevel,actual[0].Level);
+        Assert.AreEqual(expectedExperience,actual[0].Experience);
         CollectionAssert.AreEqual(expectedSlots,actual[0].Slots.ToList());
     }
 

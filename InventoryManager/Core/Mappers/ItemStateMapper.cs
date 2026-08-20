@@ -9,7 +9,7 @@ public static class ItemStateMapper
     {
         return equipStateData.ToDictionary(
             i => i.InstanceId, 
-            i => new ItemState(i.Level, i.Slots)
+            i => new ItemState(i.Level, i.Experience,i.Slots)
         );
     }
     
@@ -18,7 +18,7 @@ public static class ItemStateMapper
         ArgumentNullException.ThrowIfNull(states);
 
         return states
-            .Select(pair => new ItemStateData(pair.Key, pair.Value.Level, pair.Value.Slots))
+            .Select(pair => new ItemStateData(pair.Key, pair.Value.Level, pair.Value.Experience, pair.Value.Slots))
             .ToList();
     }
 }

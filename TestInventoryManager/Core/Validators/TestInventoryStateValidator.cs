@@ -16,7 +16,7 @@ public class TestInventoryStateValidator
 
         var states = new Dictionary<string, ItemState>()
         {
-            { uuid, new ItemState(5, ["QTM"]) }
+            { uuid, new ItemState(5, 50, ["QTM"]) }
         };
 
         var stateService = new ItemStateService(states);
@@ -34,8 +34,8 @@ public class TestInventoryStateValidator
 
         var states = new Dictionary<string, ItemState>()
         {
-            { "DIFF_UUID", new ItemState(5, ["QTM"]) },
-            { "UUID_2", new ItemState(5, ["DHM"]) }
+            { "DIFF_UUID", new ItemState(5, 50, ["QTM"]) },
+            { "UUID_2", new ItemState(5, 50, ["DHM"]) }
         };
 
         var stateService = new ItemStateService(states);
@@ -51,8 +51,8 @@ public class TestInventoryStateValidator
     {
         var states = new Dictionary<string, ItemState>()
         {
-            { "DIFF_UUID", new ItemState(5, ["QTM"]) },
-            { "UUID_2", new ItemState(5, ["DHM"]) }
+            { "DIFF_UUID", new ItemState(5, 50, ["QTM"]) },
+            { "UUID_2", new ItemState(5, 50, ["DHM"]) }
         };
 
         var stateService = new ItemStateService(states);

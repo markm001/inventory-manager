@@ -53,10 +53,10 @@ public class TestJsonInventoryRepository
     [TestMethod]
     public async Task SaveAsync_CreatesEquipmentStatesFile()
     {
-        var expected = "[{\"InstanceId\":\"UUID1\",\"Level\":15,\"Slots\":[\"SLOT1\",\"SLOT2\"]}]";
+        var expected = "[{\"InstanceId\":\"UUID1\",\"Level\":15,\"Experience\":150,\"Slots\":[\"SLOT1\",\"SLOT2\"]}]";
         var repository = new JsonRepository<IReadOnlyList<ItemStateData>>(_filePath);
 
-        var itemState = new ItemStateData("UUID1", 15, ["SLOT1", "SLOT2"]);
+        var itemState = new ItemStateData("UUID1", 15, 150, ["SLOT1", "SLOT2"]);
         IReadOnlyList<ItemStateData> data = [itemState];
         await repository.SaveAsync(data, TestContext.CancellationToken);
         

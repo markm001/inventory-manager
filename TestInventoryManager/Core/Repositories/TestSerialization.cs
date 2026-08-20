@@ -76,10 +76,10 @@ public class TestSerialization
     [TestMethod]
     public void SerializeItemStateData()
     {
-        var expectedOutput ="[{\"InstanceId\":\"8d8c4f7a-2c8e-4a8a-8a44-8c0b5c9a5f21\",\"Level\":15,\"Slots\":[\"FIRE_MATERIA\",\"CRITICAL_MATERIA\"]},{\"InstanceId\":\"ABC\",\"Level\":5,\"Slots\":[\"MATERIA_X\",\"MATERIA_Y\"]}]";
+        var expectedOutput ="[{\"InstanceId\":\"8d8c4f7a-2c8e-4a8a-8a44-8c0b5c9a5f21\",\"Level\":15,\"Experience\":150,\"Slots\":[\"FIRE_MATERIA\",\"CRITICAL_MATERIA\"]},{\"InstanceId\":\"ABC\",\"Level\":5,\"Experience\":50,\"Slots\":[\"MATERIA_X\",\"MATERIA_Y\"]}]";
         var itemStates = new Dictionary<string,ItemState>{
-            { "8d8c4f7a-2c8e-4a8a-8a44-8c0b5c9a5f21", new ItemState(15, ["FIRE_MATERIA","CRITICAL_MATERIA"]) },
-            { "ABC", new ItemState(5, ["MATERIA_X","MATERIA_Y"]) },
+            { "8d8c4f7a-2c8e-4a8a-8a44-8c0b5c9a5f21", new ItemState(15, 150,["FIRE_MATERIA","CRITICAL_MATERIA"]) },
+            { "ABC", new ItemState(5, 50,["MATERIA_X","MATERIA_Y"]) },
         };
 
         var itemStateData = ItemStateMapper.ToStateData(itemStates);

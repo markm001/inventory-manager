@@ -30,7 +30,7 @@ public class TestInventoryManager
         StackableInventoryService stackableService = new StackableInventoryService(stackInventory);
         UniqueInventoryService uniqueService = new UniqueInventoryService(uniqueInventory);
         
-        //TODO: Data Operations here...
+        // Data Operations here...
         stackableService.Add("GOLD", 99);
         uniqueService.Add(item);
 
@@ -42,8 +42,8 @@ public class TestInventoryManager
 
         ItemStateService stateService = new ItemStateService(itemStates);
         
-        //TODO: State Operations here...
-        stateService.Add(uuid, new ItemState(100, ["QTM_X"]));
+        // State Operations here...
+        stateService.Add(uuid, new ItemState(100, 1000,["QTM_X"]));
 
         try
         {

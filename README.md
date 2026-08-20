@@ -18,7 +18,7 @@ without rewriting the underlying inventory logic or relying on a specific Game E
 The primary goals of this project are:
 
 - Provide a reusable inventory system library for any C# compatible game.
-- Keep the inventory system independent from the game engine and frontend.
+- Keep the inventory system independent of the game engine and frontend.
 - Support both stackable and unique items.
 - Keep stackable and unique inventory semantics separate.
 - Track unique item instances independently using an `InstanceId`.
@@ -149,7 +149,7 @@ Contains(instanceId);
 Unique items can have state that belongs to the individual instance.
 
 ```csharp
-public sealed record ItemState(int Level, IReadOnlyList<string> Slots);
+public sealed record ItemState(int Level, int Experience, IReadOnlyList<string> Slots);
 ```
 
 For example:
@@ -159,6 +159,7 @@ For example:
   {
     "instanceId": "8d8c4f7a-2c8e-4a8a-8a44-8c0b5c9a5f21",
     "level": 15,
+    "experience": 150,
     "slots": [
       "FIRE_MATERIA",
       "CRITICAL_MATERIA"
@@ -254,7 +255,7 @@ Inventory<ItemStack> or Inventory<UniqueItem> to InventoryData
 
 ## Validatiors
 
-The `InventoryStateValidator` can be used to validate machtching UUIDs between UniqueItems and ItemStates.
+The `InventoryStateValidator` can be used to validate matching UUIDs between UniqueItems and ItemStates.
 ```csharp
 var validator = new InventoryStateValidator();
 validator.Validate(inventory, stateService.States);

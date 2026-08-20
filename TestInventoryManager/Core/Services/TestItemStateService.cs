@@ -6,20 +6,20 @@ namespace TestInventoryManager.Core.Services;
 [TestClass]
 public class TestItemStateService
 {
-    private IDictionary<string, ItemState> _states = new Dictionary<string, ItemState>()
+    private readonly IDictionary<string, ItemState> _states = new Dictionary<string, ItemState>()
     {
-        { "UUID1", new ItemState(10, ["SLOT1"]) }
+        { "UUID1", new ItemState(10, 100, ["SLOT1"]) }
     };
     
     [TestMethod]
     public void TestItemStateService_Operations()
     {
-        var expectedState = new ItemState(5, ["SLOT2"]);
+        var expectedState = new ItemState(5, 50, ["SLOT2"]);
         var expectedUuid = "UUID2";
 
         Dictionary<string, ItemState> states = new Dictionary<string, ItemState>
         {
-            { "UUID1", new ItemState(10, ["SLOT1"]) }
+            { "UUID1", new ItemState(10, 100, ["SLOT1"]) }
         };
 
         ItemStateService service = new ItemStateService(states);
@@ -74,7 +74,7 @@ public class TestItemStateService
     [TestMethod]
     public void Add_InstanceIdWhiteSpace_ThrowsArgumentException()
     {
-        ItemState itemState = new ItemState(10, ["SLOT1"]);
+        ItemState itemState = new ItemState(10, 100, ["SLOT1"]);
         ItemStateService service = new ItemStateService(_states);
 
         Assert.Throws<ArgumentException>(
@@ -95,7 +95,7 @@ public class TestItemStateService
     [TestMethod]
     public void Add_UuidExists_ThrowsInvalidOperationException()
     {
-        ItemState itemState = new ItemState(10, ["SLOT1"]);
+        ItemState itemState = new ItemState(10, 100, ["SLOT1"]);
         ItemStateService service = new ItemStateService(_states);
 
         Assert.Throws<InvalidOperationException>(
@@ -118,7 +118,7 @@ public class TestItemStateService
     [TestMethod]
     public void Update_InstanceIdWhiteSpace_ThrowsArgumentException()
     {
-        ItemState itemState = new ItemState(10, ["SLOT1"]);
+        ItemState itemState = new ItemState(10, 100, ["SLOT1"]);
         ItemStateService service = new ItemStateService(_states);
 
         Assert.Throws<ArgumentException>(
@@ -139,7 +139,7 @@ public class TestItemStateService
     [TestMethod]
     public void Update_NonExistingInstanceId_ThrowsKeyNotFoundException()
     {
-        ItemState itemState = new ItemState(10, ["SLOT1"]);
+        ItemState itemState = new ItemState(10, 100, ["SLOT1"]);
         ItemStateService service = new ItemStateService(_states);
 
         Assert.Throws<KeyNotFoundException>(
