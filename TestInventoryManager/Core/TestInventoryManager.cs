@@ -40,7 +40,7 @@ public class TestInventoryManager
 
         Dictionary<string, ItemState> itemStates = ItemStateMapper.ToItemState(itemStateData);
 
-        ItemStateService stateService = new ItemStateService(itemStates);
+        StateService<ItemState> stateService = new StateService<ItemState>(itemStates);
         
         // State Operations here...
         stateService.Add(uuid, new ItemState(100, 1000,["QTM_X"]));

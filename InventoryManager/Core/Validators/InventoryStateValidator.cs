@@ -2,9 +2,9 @@ using InventoryManager.Core.Models;
 
 namespace InventoryManager.Core.Validators;
 
-public sealed class InventoryStateValidator
+public sealed class InventoryStateValidator<T> where T : StateRecord
 {
-    public void Validate(Inventory<UniqueItem> inventory, IReadOnlyDictionary<string, ItemState> states)
+    public void Validate(Inventory<UniqueItem> inventory, IReadOnlyDictionary<string, T> states)
     {
         ArgumentNullException.ThrowIfNull(inventory);
         ArgumentNullException.ThrowIfNull(states);
@@ -18,7 +18,7 @@ public sealed class InventoryStateValidator
             if (!instanceIds.Contains(instanceId))
             {
                 throw new InvalidDataException(
-                    $"Item state references unknown item instance '{instanceId}'.");
+                    $"State references unknown instance '{instanceId}'.");
             }
         }
     }

@@ -255,9 +255,10 @@ Inventory<ItemStack> or Inventory<UniqueItem> to InventoryData
 
 ## Validators
 
-The `InventoryStateValidator` can be used to validate matching UUIDs between UniqueItems and ItemStates.
+The `InventoryStateValidator` can be used to validate matching UUIDs between UniqueItems and States.
+Any Subtype of the StateRecord Object can be used for validation.
 ```csharp
-var validator = new InventoryStateValidator();
+var validator = new InventoryStateValidator<StateRecord>();
 validator.Validate(inventory, stateService.States);
 ```
 
@@ -299,7 +300,7 @@ IReadOnlyList<ItemStateData> itemStateData = await repository.LoadAsync(TestCont
 
 Dictionary<string, ItemState> itemStates = ItemStateMapper.ToItemState(itemStateData);
 
-ItemStateService stateService = new ItemStateService(itemStates);
+StateService stateService = new StateService<ItemState>(itemStates);
 
 //TODO: State Operations here...
 stateService.Add(uuid, new ItemState(100, ["QTM_X"]));

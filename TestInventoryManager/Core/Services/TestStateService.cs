@@ -4,7 +4,7 @@ using InventoryManager.Core.Services;
 namespace TestInventoryManager.Core.Services;
 
 [TestClass]
-public class TestItemStateService
+public class TestStateService
 {
     private readonly IDictionary<string, ItemState> _states = new Dictionary<string, ItemState>()
     {
@@ -22,7 +22,7 @@ public class TestItemStateService
             { "UUID1", new ItemState(10, 100, ["SLOT1"]) }
         };
 
-        ItemStateService service = new ItemStateService(states);
+        StateService<ItemState> service = new StateService<ItemState>(states);
 
         service.Add(expectedUuid, expectedState);
         Assert.AreEqual(expectedState, service.Get(expectedUuid));
@@ -37,14 +37,14 @@ public class TestItemStateService
     [TestMethod]
     public void TestItemStateService_StateIsNull_ThrowsArgumentException()
     {
-        Assert.Throws<ArgumentNullException>(() => new ItemStateService(null));
+        Assert.Throws<ArgumentNullException>(() => new StateService<ItemState>(null));
     }
     
     // CONTAINS
     [TestMethod]
     public void Contains_InstanceIdWhiteSpace_ThrowsArgumentException()
     {
-        ItemStateService service = new ItemStateService(_states);
+        StateService<ItemState> service = new StateService<ItemState>(_states);
 
         Assert.Throws<ArgumentException>(
             () => service.Contains("")
@@ -55,7 +55,7 @@ public class TestItemStateService
     [TestMethod]
     public void Get_InstanceIdWhiteSpace_ThrowsArgumentException()
     {
-        ItemStateService service = new ItemStateService(_states);
+        StateService<ItemState> service = new StateService<ItemState>(_states);
 
         Assert.Throws<ArgumentException>(
             () => service.Get("")
@@ -65,7 +65,7 @@ public class TestItemStateService
     [TestMethod]
     public void Get_NonExistingInstanceId_ReturnsNull()
     {
-        ItemStateService service = new ItemStateService(_states);
+        StateService<ItemState> service = new StateService<ItemState>(_states);
 
         Assert.IsNull(service.Get("ABC"));
     }
@@ -75,7 +75,7 @@ public class TestItemStateService
     public void Add_InstanceIdWhiteSpace_ThrowsArgumentException()
     {
         ItemState itemState = new ItemState(10, 100, ["SLOT1"]);
-        ItemStateService service = new ItemStateService(_states);
+        StateService<ItemState> service = new StateService<ItemState>(_states);
 
         Assert.Throws<ArgumentException>(
             () => service.Add("", itemState)
@@ -85,7 +85,7 @@ public class TestItemStateService
     [TestMethod]
     public void Add_StateNull_ThrowsArgumentNullException()
     {
-        ItemStateService service = new ItemStateService(_states);
+        StateService<ItemState> service = new StateService<ItemState>(_states);
 
         Assert.Throws<ArgumentNullException>(
             () => service.Add("TEST", null)
@@ -96,7 +96,7 @@ public class TestItemStateService
     public void Add_UuidExists_ThrowsInvalidOperationException()
     {
         ItemState itemState = new ItemState(10, 100, ["SLOT1"]);
-        ItemStateService service = new ItemStateService(_states);
+        StateService<ItemState> service = new StateService<ItemState>(_states);
 
         Assert.Throws<InvalidOperationException>(
             () => service.Add("UUID1", itemState)
@@ -107,7 +107,7 @@ public class TestItemStateService
     [TestMethod]
     public void Remove_InstanceIdWhiteSpace_ThrowsArgumentException()
     {
-        ItemStateService service = new ItemStateService(_states);
+        StateService<ItemState> service = new StateService<ItemState>(_states);
 
         Assert.Throws<ArgumentException>(
             () => service.Remove("")
@@ -119,7 +119,7 @@ public class TestItemStateService
     public void Update_InstanceIdWhiteSpace_ThrowsArgumentException()
     {
         ItemState itemState = new ItemState(10, 100, ["SLOT1"]);
-        ItemStateService service = new ItemStateService(_states);
+        StateService<ItemState> service = new StateService<ItemState>(_states);
 
         Assert.Throws<ArgumentException>(
             () => service.Update("", itemState)
@@ -129,7 +129,7 @@ public class TestItemStateService
     [TestMethod]
     public void Update_StateIsNull_ThrowsArgumentNullException()
     {
-        ItemStateService service = new ItemStateService(_states);
+        StateService<ItemState> service = new StateService<ItemState>(_states);
 
         Assert.Throws<ArgumentException>(
             () => service.Update("UUID1", null)
@@ -140,7 +140,7 @@ public class TestItemStateService
     public void Update_NonExistingInstanceId_ThrowsKeyNotFoundException()
     {
         ItemState itemState = new ItemState(10, 100, ["SLOT1"]);
-        ItemStateService service = new ItemStateService(_states);
+        StateService<ItemState> service = new StateService<ItemState>(_states);
 
         Assert.Throws<KeyNotFoundException>(
             () => service.Update("NOT_EXISTS", itemState)

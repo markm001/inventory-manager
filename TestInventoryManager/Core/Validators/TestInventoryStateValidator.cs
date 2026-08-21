@@ -19,9 +19,9 @@ public class TestInventoryStateValidator
             { uuid, new ItemState(5, 50, ["QTM"]) }
         };
 
-        var stateService = new ItemStateService(states);
+        var stateService = new StateService<ItemState>(states);
 
-        var validator = new InventoryStateValidator();
+        var validator = new InventoryStateValidator<ItemState>();
         validator.Validate(inventory, stateService.States);
     }
     
@@ -38,9 +38,9 @@ public class TestInventoryStateValidator
             { "UUID_2", new ItemState(5, 50, ["DHM"]) }
         };
 
-        var stateService = new ItemStateService(states);
+        var stateService = new StateService<ItemState>(states);
 
-        var validator = new InventoryStateValidator();
+        var validator = new InventoryStateValidator<ItemState>();
         Assert.Throws<InvalidDataException>(
             () => validator.Validate(inventory, stateService.States)
         );
@@ -55,9 +55,9 @@ public class TestInventoryStateValidator
             { "UUID_2", new ItemState(5, 50, ["DHM"]) }
         };
 
-        var stateService = new ItemStateService(states);
+        var stateService = new StateService<ItemState>(states);
 
-        var validator = new InventoryStateValidator();
+        var validator = new InventoryStateValidator<ItemState>();
         Assert.Throws<ArgumentNullException>(
             () => validator.Validate(null, stateService.States)
         );
@@ -70,7 +70,7 @@ public class TestInventoryStateValidator
         var itemTwo = new UniqueItem("UUID_2", new InventoryItem("ARMOR", false));
         var inventory = new Inventory<UniqueItem>([item,itemTwo]);
 
-        var validator = new InventoryStateValidator();
+        var validator = new InventoryStateValidator<ItemState>();
         Assert.Throws<ArgumentNullException>(
             () => validator.Validate(inventory, null)
         );

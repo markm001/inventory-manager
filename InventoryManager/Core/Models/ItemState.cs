@@ -1,6 +1,6 @@
 namespace InventoryManager.Core.Models;
 
-public sealed record ItemState
+public sealed record ItemState: StateRecord
 {
     public int Level { get; }
     public int Experience { get; }

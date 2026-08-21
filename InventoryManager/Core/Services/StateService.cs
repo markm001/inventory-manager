@@ -2,16 +2,16 @@ using InventoryManager.Core.Models;
 
 namespace InventoryManager.Core.Services;
 
-public sealed class ItemStateService
+public sealed class StateService<T> where T : StateRecord
 {
-    private readonly Dictionary<string, ItemState> _states;
-    public IReadOnlyDictionary<string, ItemState> States => _states;
+    private readonly Dictionary<string, T> _states;
+    public IReadOnlyDictionary<string, T> States => _states;
 
-    public ItemStateService(IDictionary<string, ItemState> states)
+    public StateService(IDictionary<string, T> states)
     {
         ArgumentNullException.ThrowIfNull(states);
 
-        _states = new Dictionary<string, ItemState>(states);
+        _states = new Dictionary<string, T>(states);
     }
 
     public bool Contains(string instanceId)
@@ -21,14 +21,14 @@ public sealed class ItemStateService
         return _states.ContainsKey(instanceId);
     }
 
-    public ItemState? Get(string instanceId)
+    public T? Get(string instanceId)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(instanceId);
 
         return _states.GetValueOrDefault(instanceId);
     }
 
-    public void Add(string instanceId, ItemState state)
+    public void Add(string instanceId, T state)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(instanceId);
         ArgumentNullException.ThrowIfNull(state);
@@ -36,7 +36,7 @@ public sealed class ItemStateService
         if (!_states.TryAdd(instanceId, state))
         {
             throw new InvalidOperationException(
-                $"State already exists for item instance '{instanceId}'.");
+                $"State already exists for the instance '{instanceId}'.");
         }
     }
 
@@ -47,7 +47,7 @@ public sealed class ItemStateService
         return _states.Remove(instanceId);
     }
 
-    public void Update(string instanceId, ItemState state)
+    public void Update(string instanceId, T state)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(instanceId);
         ArgumentNullException.ThrowIfNull(state);
@@ -55,7 +55,7 @@ public sealed class ItemStateService
         if (!_states.ContainsKey(instanceId))
         {
             throw new KeyNotFoundException(
-                $"No state exists for item instance '{instanceId}'.");
+                $"No state exists for the instance '{instanceId}'.");
         }
 
         _states[instanceId] = state;
